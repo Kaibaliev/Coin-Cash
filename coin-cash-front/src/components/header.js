@@ -38,7 +38,8 @@ export default function AppHeader (props) {
                     </Typography>
                     <IconButton aria-label="display more actions"
                                 edge="end"
-                                color="inherit">
+                                color="inherit"
+                                onClick={()=> props.onRightIconClick()}>
                         <MoreIcon />
                     </IconButton>
                 </Toolbar>
