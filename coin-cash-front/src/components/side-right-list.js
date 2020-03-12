@@ -53,7 +53,7 @@ export const RightSideList = side => {
             </List>
             <Divider/>
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                {['Support'].map((text) => (
                     <ListItem button key={text}>
                         <ListItemIcon>
                             <ContactSupportIcon/>
