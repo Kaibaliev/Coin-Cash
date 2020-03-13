@@ -1,10 +1,9 @@
 import React from 'react'
-// import {Switch} from "@material-ui/core";
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {UserPage} from "./pages/UserPage";
 import {IncomePage} from "./pages/IncomePage";
 import {ExpensePage} from "./pages/ExpensePage";
-import AuthPage from "./pages/AuthPage";
+import {AuthPage} from "./pages/AuthPage";
 
 export const useRoutes = isAuthenticated => {
     if (isAuthenticated) {

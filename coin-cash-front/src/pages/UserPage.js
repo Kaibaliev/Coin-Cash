@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import AppHeader from "../components/header";
 import {AppDrawer} from "../components/drawer";
+import SimpleBottomNavigation from "../components/bottom-menu";
 
 export class UserPage extends Component {
 
@@ -24,6 +25,9 @@ export class UserPage extends Component {
                     right={this.state.isDrawerRightOpen}
                     toggleDrawer={() => this.setState({isDrawerLeftOpen: false, isDrawerRightOpen: false})}
                 />
+
+
+                <SimpleBottomNavigation/>
 
             </div>
         )

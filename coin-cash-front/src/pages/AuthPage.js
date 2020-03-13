@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,8 +10,10 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {useHttp} from "../hooks/http.hook";
+import {useMessage} from "../hooks/message.hook";
 
 function Copyright() {
     return (
@@ -46,21 +48,36 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function SignIn() {
+export const AuthPage = () => {
     const classes = useStyles();
+    const message = useMessage();
+    const {loading, request, error, clearError} = useHttp();
     const [form, setForm] = useState({
-        phone:"", password:""
+        phone: "", password: ""
     });
+
+    useEffect(() => {
+        message(error);
+        clearError()
+    }, [error, message, clearError]);
+
     const changeHandler = event => {
         setForm({...form, [event.target.name]: event.target.value})
     };
 
+    const registerHandler = async () => {
+        try {
+            const data = await request('/api/auth/register', 'POST', {...form});
+            console.log('Data', data)
+        } catch (e) {}
+    };
+
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
+            <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
+                    <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign in
@@ -72,9 +89,9 @@ export default function SignIn() {
                         required
                         fullWidth
                         id="phone"
-                        label="Phone Number"
+                        label="+996 ( x x x ) xx - xx - xx"
                         name="phone"
-                        type="phone number"
+                        type="phone"
                         autoFocus
                         onChange={changeHandler}
                     />
@@ -87,10 +104,11 @@ export default function SignIn() {
                         label="Password"
                         type="password"
                         id="password"
+                        autoFocus
                         onChange={changeHandler}
                     />
                     <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
+                        control={<Checkbox value="remember" color="primary"/>}
                         label="Remember me"
                     />
                     <Button
@@ -99,6 +117,7 @@ export default function SignIn() {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        disabled={loading}
                     >
                         Sign In
                     </Button>
@@ -107,6 +126,8 @@ export default function SignIn() {
                         fullWidth
                         variant="contained"
                         className={classes.submit}
+                        onClick={registerHandler}
+                        disabled={loading}
                     >
                         Log In
                     </Button>
@@ -125,7 +146,7 @@ export default function SignIn() {
                 </form>
             </div>
             <Box mt={8}>
-                <Copyright />
+                <Copyright/>
             </Box>
         </Container>
     );

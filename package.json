@@ -1,0 +1,30 @@
+{
+  "name": "Coin-cash",
+  "version": "1.0.0",
+  "description": "Coin-cash Backend",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "coin-cash-front": "npm run start --prefix coin-cash-front",
+    "dev": "concurrently \"npm run server\" \"npm run  coin-cash-front\""
+  },
+  "keywords": [
+    "mern",
+    "react"
+  ],
+  "author": "Kaibaliev Chingiz <chika.kaiba.kg@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.4"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2"
+  }
+}

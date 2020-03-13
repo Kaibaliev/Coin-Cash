@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "jwtSecret": "kaibaliev coin app",
+  "mongoUri": "mongodb+srv://kaibaliev:1234qwer@cluster0-eb2if.azure.mongodb.net/app?retryWrites=true&w=majority"
+}
