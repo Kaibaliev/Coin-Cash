@@ -10,7 +10,7 @@ const router = Router();
 router.post(
     '/register',
     [
-        check('tel', 'Некорректный номер').isNumeric(),
+        check('email', 'Некорректный номер').normalizeEmail().isEmail,
         check('password', 'Минимальная длинна пароля 6 символов')
             .isLength({min: 6})
     ],
@@ -26,9 +26,9 @@ router.post(
                 })
             }
 
-            const {tel, password} = req.body;
+            const {email, password} = req.body;
 
-            const candidate = await User.findOne({tel});
+            const candidate = await User.findOne({email});
 
             if (candidate) {
                 return res.status(400).json({message: 'Пользователь с таким номером уже существует'})
@@ -50,7 +50,7 @@ router.post(
 router.post(
     '/login',
     [
-        check('tel', 'Некорректный номер').isNumeric(),
+        check('email', 'Некорректный номер').isEmail(),
         check('password', 'Введите пароль').exists()
     ],
     async (req, res) => {
@@ -65,8 +65,8 @@ router.post(
                 })
             }
 
-            const {tel, password} = req.body;
-            const user = await User.findOne({tel});
+            const {email, password} = req.body;
+            const user = await User.findOne({email});
 
             if (!user) {
                 return res.status(400).json({message: 'Пользователь не найден'})

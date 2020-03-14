@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {useHttp} from "../hooks/http.hook";
 import {useMessage} from "../hooks/message.hook";
+import {AuthContext} from "../context/AuthContext";
 
 function Copyright() {
     return (
@@ -49,6 +50,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const AuthPage = () => {
+    const auth = useContext(AuthContext);
     const classes = useStyles();
     const message = useMessage();
     const {loading, request, error, clearError} = useHttp();
@@ -68,7 +70,13 @@ export const AuthPage = () => {
     const registerHandler = async () => {
         try {
             const data = await request('/api/auth/register', 'POST', {...form});
-            console.log('Data', data)
+            message(data.message)
+        } catch (e) {}
+    };
+    const loginHandler = async () => {
+        try {
+            const data = await request('/api/auth/register', 'POST', {...form});
+            auth.login(data.token, data.userId)
         } catch (e) {}
     };
 
@@ -88,10 +96,10 @@ export const AuthPage = () => {
                         margin="normal"
                         required
                         fullWidth
-                        id="phone"
-                        label="+996 ( x x x ) xx - xx - xx"
-                        name="phone"
-                        type="phone"
+                        id="email"
+                        label="Enter email address"
+                        name="email"
+                        type="email"
                         autoFocus
                         onChange={changeHandler}
                     />
@@ -118,6 +126,7 @@ export const AuthPage = () => {
                         color="primary"
                         className={classes.submit}
                         disabled={loading}
+                        onClick={loginHandler}
                     >
                         Sign In
                     </Button>
@@ -150,4 +159,4 @@ export const AuthPage = () => {
             </Box>
         </Container>
     );
-}
+};
