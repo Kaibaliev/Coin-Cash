@@ -15,7 +15,7 @@ export class UserPage extends Component {
 
     render() {
         return (
-            <div className="App">
+            <div className="container">
                 <AppHeader
                     onLeftIconClick={() => this.setState({isDrawerLeftOpen: true})}
                     onRightIconClick={() => this.setState({isDrawerRightOpen: true})}
@@ -27,7 +27,8 @@ export class UserPage extends Component {
                 />
 
 
-                <SimpleBottomNavigation/>
+
+                <SimpleBottomNavigation />
 
             </div>
         )

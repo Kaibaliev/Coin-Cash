@@ -1,23 +1,23 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import Button from '@material-ui/core/Button';
 import HomeIcon from '@material-ui/icons/Home';
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import FormatIndentDecreaseIcon from '@material-ui/icons/FormatIndentDecrease';
+import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme=>({
     list: {
         width: 250,
     },
     fullList: {
         width: 'auto',
     },
-});
-
+}));
 
 
 export const LeftSideList = side => {
@@ -44,21 +44,38 @@ export const LeftSideList = side => {
             onKeyDown={toggleDrawer(side, false)}
         >
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <HomeIcon/> : <MailIcon/>}</ListItemIcon>
-                        <ListItemText primary={text}/>
-                    </ListItem>
-                ))}
-            </List>
-            <Divider/>
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
-                        <ListItemText primary={text}/>
-                    </ListItem>
-                ))}
+                <ListItem>
+                    <Button>
+                    <ListItemIcon >
+                        <HomeIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={'Home page'}/>
+                    </Button>
+                </ListItem>
+                <ListItem>
+                    <Button>
+                    <ListItemIcon>
+                        <AccountBalanceWalletIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={'Balance'}/>
+                    </Button>
+                </ListItem>
+                <ListItem>
+                    <Button>
+                    <ListItemIcon>
+                        <FormatIndentIncreaseIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={'Income'}/>
+                    </Button>
+                </ListItem>
+                <ListItem>
+                    <Button>
+                    <ListItemIcon>
+                        <FormatIndentDecreaseIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={'Expence'}/>
+                    </Button>
+                </ListItem>
             </List>
         </div>
     )
