@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const CashFlowPage = () => {
+export const HomePage = () => {
     return(
         <div>
-            <h1>Cash Flow Page</h1>
+            <h1>Home Page</h1>
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {makeStyles} from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,7 +11,9 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import FormatIndentDecreaseIcon from '@material-ui/icons/FormatIndentDecrease';
 import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
 
-const useStyles = makeStyles(theme=>({
+
+
+const useStyles = makeStyles(() => ({
     list: {
         width: 250,
     },
@@ -25,7 +28,6 @@ export const LeftSideList = side => {
     const classes = useStyles();
     const [state, setState] = React.useState({
         left: false,
-        right: false,
     });
 
     const toggleDrawer = (side, open) => event => {
@@ -45,38 +47,47 @@ export const LeftSideList = side => {
         >
             <List>
                 <ListItem>
-                    <Button>
-                    <ListItemIcon >
-                        <HomeIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary={'Home page'}/>
-                    </Button>
+                    <Link to='/home'>
+                        <Button>
+                            <ListItemIcon>
+                                <HomeIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Home page'}/>
+                        </Button>
+                    </Link>
                 </ListItem>
                 <ListItem>
-                    <Button>
-                    <ListItemIcon>
-                        <AccountBalanceWalletIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary={'Balance'}/>
-                    </Button>
+                    <Link to='/balance'>
+                        <Button>
+                            <ListItemIcon>
+                                <AccountBalanceWalletIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Balance'}/>
+                        </Button>
+                    </Link>
                 </ListItem>
                 <ListItem>
-                    <Button>
-                    <ListItemIcon>
-                        <FormatIndentIncreaseIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary={'Income'}/>
-                    </Button>
+                    <Link to='/income'>
+                        <Button>
+                            <ListItemIcon>
+                                <FormatIndentIncreaseIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Income'}/>
+                        </Button>
+                    </Link>
                 </ListItem>
                 <ListItem>
-                    <Button>
-                    <ListItemIcon>
-                        <FormatIndentDecreaseIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary={'Expence'}/>
-                    </Button>
+                    <Link to='/expense'>
+                        <Button>
+                            <ListItemIcon>
+                                <FormatIndentDecreaseIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Expense'}/>
+                        </Button>
+                    </Link>
                 </ListItem>
             </List>
+
         </div>
     )
 };
